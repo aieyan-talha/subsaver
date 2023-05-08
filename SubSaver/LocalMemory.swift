@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct ReoccuringPeriod: Codable, Hashable {
-    var days:Int = 0;
+    var weeks:Int = 0;
     var months:Int = 0;
     var years:Int = 0;
     
-    init(weeks:Int=0, days:Int=0, months:Int=0, years:Int=0) {
-        self.days += (weeks * 7);
-        self.days += days;
+    init(weeks:Int=0, months:Int=0, years:Int=0) {
+        self.weeks += weeks;
         self.months += months;
         self.years += years;
     }
     
     func inDays() -> Int {
-        return (self.days) + (self.months*31) + (self.years*365);
+        return (self.weeks*7) + (self.months*31) + (self.years*365);
     }
 }
 
