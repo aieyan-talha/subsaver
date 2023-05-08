@@ -62,3 +62,34 @@ class ScoreStore {
     }
 }
 
+//Given a Subscription Object (Definition in LocalMemory file) and a string (“year”, “month” or “week”). Calculate the cards cost for that time period.Return the value as a Double.
+
+func calculateCost(for subscription: Subscription, period: String) -> Double {
+    let days: Int
+    
+    switch period {
+    case "year":
+        days = 365 * subscription.reoccurPeriod.years
+    case "month":
+        days = 31 * subscription.reoccurPeriod.months
+    case "week":
+        days = 7 * subscription.reoccurPeriod.weeks
+    default:
+        days = 0
+    }
+    
+    return subscription.price * Double(days)
+}
+
+//Given an array of subscriptions and a time period: String ('year', ‘month or ‘day’). Calculate the total cost of the subscription for that time period. Return a Double.
+
+func calculateTotalCost(for subscriptions: [Subscription], period: String) -> Double {
+    var totalCost = 0.0
+    
+    for subscription in subscriptions {
+        totalCost += calculateCost(for: subscription, period: period)
+    }
+    
+    return totalCost
+}
+
