@@ -8,15 +8,64 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text("Hello, Sub Saver Creators!")
-            Text("Lets Begin!")
-            SmallCard(title: "this is an example", textContent: "this is an example content, feel free to make edits to the card in ./CardView")
-            TimeAndDateNotificationExample()
-        }
-        .padding()
+    @State var showCreateForm: Bool = false
+    @State var someVal: Int = 0
+    
+    @State var fieldName: String = ""
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+
+    @FetchRequest(
+        sortDescriptors: []
+    ) var subs: FetchedResults<SubscriptionModel>
+    
+    func handleCreateButton() {
+        showCreateForm.toggle()
     }
+    
+    var body: some View {
+        ZStack {
+            VStack {
+                Button(action: handleCreateButton) {
+                    Text("+").font(.custom("Cambria", size: 20))
+                }.frame(width: 50, height: 50)
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(40)
+                
+                ScrollView {
+                    ForEach(subs, id: \.self) { sub in
+                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "")
+                    }
+                    
+                    TimeAndDateNotificationExample()
+                }
+                
+                
+            }
+            .padding()
+        }.fullScreenCover(isPresented: $showCreateForm) {
+            GeometryReader { geo in
+                ZStack{
+                    CreateAndEditCardView(showPopup: $showCreateForm)
+                }.frame(height: geo.size.height)
+                    .background(BackgroundBlurView())
+                    
+            }
+        }
+    }
+}
+
+struct BackgroundBlurView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 struct ContentView_Previews: PreviewProvider {

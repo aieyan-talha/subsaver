@@ -7,21 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2821EBB02A09E9550031C91C /* CreateAndEditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2821EBAF2A09E9550031C91C /* CreateAndEditCardView.swift */; };
 		289D33EF2A062D7F002ADAF7 /* SubSaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D33EE2A062D7F002ADAF7 /* SubSaverApp.swift */; };
 		289D33F12A062D7F002ADAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D33F02A062D7F002ADAF7 /* ContentView.swift */; };
 		289D33F32A062D80002ADAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289D33F22A062D80002ADAF7 /* Assets.xcassets */; };
 		289D33F62A062D80002ADAF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289D33F52A062D80002ADAF7 /* Preview Assets.xcassets */; };
+		28EA014B2A0CB0B50052DDE5 /* SubModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28EA01492A0CB0B50052DDE5 /* SubModel.xcdatamodeld */; };
+		28EA014D2A0CB6060052DDE5 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EA014C2A0CB6060052DDE5 /* CoreDataController.swift */; };
+		28EA01502A0CCB230052DDE5 /* SubscriptionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */; };
 		FDD3664C2A06701500BFA777 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664B2A06701500BFA777 /* CardView.swift */; };
 		FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664D2A0670D200BFA777 /* LocalMemory.swift */; };
 		FDD366502A06714200BFA777 /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664F2A06714200BFA777 /* LocalNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2821EBAF2A09E9550031C91C /* CreateAndEditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndEditCardView.swift; sourceTree = "<group>"; };
 		289D33EB2A062D7F002ADAF7 /* SubSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		289D33EE2A062D7F002ADAF7 /* SubSaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSaverApp.swift; sourceTree = "<group>"; };
 		289D33F02A062D7F002ADAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		289D33F22A062D80002ADAF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		289D33F52A062D80002ADAF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		28EA014A2A0CB0B50052DDE5 /* SubModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SubModel.xcdatamodel; sourceTree = "<group>"; };
+		28EA014C2A0CB6060052DDE5 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionItem.swift; sourceTree = "<group>"; };
 		FDD3664B2A06701500BFA777 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		FDD3664D2A0670D200BFA777 /* LocalMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMemory.swift; sourceTree = "<group>"; };
 		FDD3664F2A06714200BFA777 /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
@@ -57,13 +65,17 @@
 		289D33ED2A062D7F002ADAF7 /* SubSaver */ = {
 			isa = PBXGroup;
 			children = (
+				28EA014E2A0CCB070052DDE5 /* Models */,
 				FDD3664F2A06714200BFA777 /* LocalNotifications.swift */,
 				FDD3664D2A0670D200BFA777 /* LocalMemory.swift */,
 				289D33EE2A062D7F002ADAF7 /* SubSaverApp.swift */,
 				FDD3664B2A06701500BFA777 /* CardView.swift */,
 				289D33F02A062D7F002ADAF7 /* ContentView.swift */,
+				2821EBAF2A09E9550031C91C /* CreateAndEditCardView.swift */,
 				289D33F22A062D80002ADAF7 /* Assets.xcassets */,
 				289D33F42A062D80002ADAF7 /* Preview Content */,
+				28EA01492A0CB0B50052DDE5 /* SubModel.xcdatamodeld */,
+				28EA014C2A0CB6060052DDE5 /* CoreDataController.swift */,
 			);
 			path = SubSaver;
 			sourceTree = "<group>";
@@ -74,6 +86,14 @@
 				289D33F52A062D80002ADAF7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		28EA014E2A0CCB070052DDE5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,10 +166,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2821EBB02A09E9550031C91C /* CreateAndEditCardView.swift in Sources */,
 				FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */,
+				28EA014D2A0CB6060052DDE5 /* CoreDataController.swift in Sources */,
 				289D33F12A062D7F002ADAF7 /* ContentView.swift in Sources */,
+				28EA014B2A0CB0B50052DDE5 /* SubModel.xcdatamodeld in Sources */,
 				FDD3664C2A06701500BFA777 /* CardView.swift in Sources */,
 				FDD366502A06714200BFA777 /* LocalNotifications.swift in Sources */,
+				28EA01502A0CCB230052DDE5 /* SubscriptionItem.swift in Sources */,
 				289D33EF2A062D7F002ADAF7 /* SubSaverApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +375,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		28EA01492A0CB0B50052DDE5 /* SubModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				28EA014A2A0CB0B50052DDE5 /* SubModel.xcdatamodel */,
+			);
+			currentVersion = 28EA014A2A0CB0B50052DDE5 /* SubModel.xcdatamodel */;
+			path = SubModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 289D33E32A062D7F002ADAF7 /* Project object */;
 }
