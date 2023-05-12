@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SubSaverApp: App {
+    let coreDataController = CoreDataController.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(\.managedObjectContext, coreDataController.container.viewContext)
         }
     }
     
