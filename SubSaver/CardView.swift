@@ -25,6 +25,7 @@ struct InnerSmallCard: View {
     let cardTitle:String;
     let textContent:String;
     let handleEdit: () -> Void
+    let period: Interval;
     let handleDelete: () -> Void
     let price:Float;
     
@@ -37,7 +38,7 @@ struct InnerSmallCard: View {
     var body: some View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: (!isOpen ? CLOSED_HEIGHT : HEIGHT)).cornerRadius(20).foregroundStyle(backgroundGradient)
-        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, handleDelete: handleDelete, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
+        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, period: period, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
     }
 }
 
@@ -89,6 +90,7 @@ struct TitleCard: View {
 struct ContentCard: View {
     let textContent:String;
     let price:Float;
+    let period: Interval;
     @Binding var isOpen:Bool;
     //WIDTH-20
     let initialWidth:CGFloat = 50;
@@ -96,7 +98,7 @@ struct ContentCard: View {
         VStack {
             Text("Your next payment is on xxxxx").font(.system(size: 16)).foregroundColor(.white)
             if (!isOpen) {
-                PriceCard(price:price, interval: .weekly)
+                PriceCard(price:price, interval: period)
             }
             Spacer()
             if (isOpen) {
@@ -126,7 +128,7 @@ struct RoundedCorner: Shape {
     }
 }
 
-enum Interval {
+enum Interval: String, CaseIterable {
     case weekly
     case monthly
     case annually
@@ -161,6 +163,7 @@ struct PriceCard: View {
 struct SmallCard: View {
     let title:String;
     let textContent:String;
+    let period:String;
     
     let handleEdit: () -> Void
     let handleDelete: () -> Void
@@ -168,7 +171,7 @@ struct SmallCard: View {
     
     var body: some View {
         ZStack {
-            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, handleDelete: handleDelete, price: price)
+            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, period: Interval(rawValue: period) ?? .weekly, price: price)
         }
     }
 }

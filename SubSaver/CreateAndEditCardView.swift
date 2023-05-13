@@ -19,6 +19,7 @@ struct CreateAndEditCardView: View {
     @State private var subDate = Date.now
     @State private var price: Float = 0
     @State private var notes: String = ""
+    @State private var period:Interval = .weekly;
     @State var currencySelected: String = "USD"
     
     @State var edtitingSubscriptionItem: SubscriptionModel? = nil
@@ -42,7 +43,7 @@ struct CreateAndEditCardView: View {
         showPopup.toggle()
         
         if (isEditingSubscription) {
-            CoreDataController.shared.editItem(item: edtitingSubscriptionItem!, newName: username, newNotes: notes, newDate: subDate, newCurrencyType: currencySelected, newPrice: price)
+            CoreDataController.shared.editItem(item: edtitingSubscriptionItem!, newName: username, newNotes: notes, newDate: subDate, newCurrencyType: currencySelected, newPrice: price, newPeriod: period)
             
             isEditingSubscription.toggle()
             editingSubscriptionId = ""
@@ -55,9 +56,11 @@ struct CreateAndEditCardView: View {
             subscription.subDate = subDate
             subscription.selectedCurrency = currencySelected
             subscription.price = price
+            subscription.period = period.rawValue;
             subscription.notes = notes
             
             CoreDataController.shared.save()
+            createNotification(id: randomId, name: username, subDate: subDate, period: period.rawValue, price: price)
         }
     }
     
@@ -101,6 +104,13 @@ struct CreateAndEditCardView: View {
             DatePicker(selection: $subDate, displayedComponents: [.date]) {
                 Text("Date")
             }.padding()
+            Picker("", selection: $period) {
+                            ForEach(Interval.allCases, id: \.self) { interval in
+                                Text(interval.rawValue.capitalized).tag(interval)
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding()
             
             HStack {
                 Text("Price")
@@ -155,6 +165,7 @@ struct CreateAndEditCardView: View {
                         self.price = sub.price
                         self.notes = sub.notes ?? ""
                         self.subDate = sub.subDate!
+                        self.period = Interval(rawValue: sub.period ?? "weekly") ?? .weekly
                         self.currencySelected = sub.selectedCurrency ?? ""
                         
                         self.edtitingSubscriptionItem = sub

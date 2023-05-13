@@ -98,7 +98,7 @@ struct ContentView: View {
                     ForEach(subs, id: \.self) { sub in
 
                         if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
-                            SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
+                            SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", handleEdit: {
                             self.handleEditSubscription(id: sub.id)
                         }, handleDelete: {
                             self.handleDeleteClick(id: sub.id)
@@ -155,7 +155,7 @@ struct TimeAndDateNotificationExample: View {
             DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
                 .labelsHidden()
             Button("Click to apply notification to ping on this date/time") {
-                createNotification("Notification!", "THIS IS A TEST", selectedTime)
+                updateTriggerTime(time: selectedTime)
                 
             }
         }
