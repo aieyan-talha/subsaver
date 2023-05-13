@@ -22,6 +22,11 @@ struct ReoccuringPeriod: Codable, Hashable {
     func inDays() -> Int {
         return (self.days) + (self.months*31) + (self.years*365);
     }
+    
+    func inWeeks() -> Int {
+        //todo need to add number of weeks, if in the furture we add weeks in ReoccuringPeriod
+        return (self.months * 4) + (self.years * 52)
+    }
 }
 
 struct Subscription: Codable, Hashable {
