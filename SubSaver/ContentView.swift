@@ -35,7 +35,9 @@ struct ContentView: View {
                 
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
-                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "")
+                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", price: sub.price ?? 0).transition(.slide)
+                            .animation(.easeInOut(duration: 0.4))
+                            
                     }
                     
                     TimeAndDateNotificationExample()
