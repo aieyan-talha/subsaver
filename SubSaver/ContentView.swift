@@ -10,12 +10,14 @@ import SwiftUI
 let backgroundColorGradient = RadialGradient(
     gradient: Gradient(colors: [Color(red: 0.176, green: 0.424, blue: 0.875).opacity(1), Color.white.opacity(0)]),
     center: .center, startRadius: 0, endRadius: 500)
+
+
 struct ContentView: View {
     @State var showCreateForm: Bool = false
-    @State var totalPrice:Float = 52.00;
-    //@State var someVal: Int = 0
     
-    //@State var fieldName: String = ""
+    @State var isEditingSubscription: Bool = false
+    @State var editingSubscriptionId: String = ""
+    @State var totalPrice:Float = 52.00;
     
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -27,12 +29,24 @@ struct ContentView: View {
         showCreateForm.toggle()
     }
     
+    func handleEditSubscription(id: UUID?) {
+        if let subId = id {
+            self.isEditingSubscription = true
+            self.editingSubscriptionId = subId.uuidString
+            self.showCreateForm.toggle()
+        }
+    }
+    
     var body: some View {
         ZStack {
             backgroundColorGradient.ignoresSafeArea()
             VStack {
                 Button(action: handleCreateButton) {
-                    Text("+").font(.custom("Cambria", size: 20))
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 15)
                 }.frame(width: 50, height: 50)
                     .background(.blue)
                     .foregroundColor(.white)
@@ -42,9 +56,10 @@ struct ContentView: View {
                     .font(.system(size: 40)).foregroundColor(.white).frame(width: 240, height: 96).multilineTextAlignment(.center)
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
-                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", price: sub.price ?? 0).transition(.slide)
+                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
+                            self.handleEditSubscription(id: sub.id)
+                        }, price: sub.price).transition(.slide)
                             .animation(.easeInOut(duration: 0.4))
-                            
                     }
                     
                     TimeAndDateNotificationExample()
@@ -56,7 +71,7 @@ struct ContentView: View {
         }.fullScreenCover(isPresented: $showCreateForm) {
             GeometryReader { geo in
                 ZStack{
-                    CreateAndEditCardView(showPopup: $showCreateForm)
+                    CreateAndEditCardView(showPopup: $showCreateForm, isEditingSubscription: $isEditingSubscription, editingSubscriptionId: $editingSubscriptionId)
                 }.frame(height: geo.size.height)
                     .background(BackgroundBlurView())
                     

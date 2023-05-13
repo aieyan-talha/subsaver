@@ -41,4 +41,20 @@ struct CoreDataController {
         }
     }
     
+    func editItem(item: SubscriptionModel, newName: String, newNotes: String, newDate: Date, newCurrencyType: String, newPrice: Float) {
+        item.name = newName
+        item.notes = newNotes
+        item.price = newPrice
+        item.selectedCurrency = newCurrencyType
+        item.subDate = newDate
+        
+        let context = container.viewContext
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Error updating item: \(error)")
+        }
+    }
+    
 }

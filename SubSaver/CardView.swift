@@ -24,8 +24,11 @@ struct OuterCard: View {
 struct InnerSmallCard: View {
     let cardTitle:String;
     let textContent:String;
+    let handleEdit: () -> Void
     let price:Float;
+    
     @State var isOpen:Bool = false;
+    
     let backgroundGradient = LinearGradient(
         gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
         startPoint: .leading, endPoint: .trailing)
@@ -33,13 +36,18 @@ struct InnerSmallCard: View {
     var body: some View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: (!isOpen ? CLOSED_HEIGHT : HEIGHT)).cornerRadius(20).foregroundStyle(backgroundGradient)
-        }.overlay(TitleCard(cardTitle: cardTitle, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
-        
+        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
     }
 }
 
 struct TitleCard: View {
     let cardTitle:String;
+    let handleEdit: () -> Void
+    
+    let backgroundGradient = LinearGradient(
+        gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
+        startPoint: .leading, endPoint: .trailing)
+
     @Binding var isOpen:Bool;
     
     
@@ -51,7 +59,18 @@ struct TitleCard: View {
                 Text(cardTitle).font(.system(size: 24, weight: Font.Weight.bold)).foregroundColor(.white)
                 
                 Spacer()
-                
+//<<<<<<< HEAD
+//
+//            }.padding().frame(width: 336, height: 64)
+//=======
+//
+                Button(action: {
+                    handleEdit()
+                }) {
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                }
                 Image("down-arrow").resizable().colorInvert().scaledToFit().frame(width:25, height:25)
                     .rotationEffect(.degrees(!isOpen ? 180 : 0)).transition(.slide).animation(.easeInOut, value: isOpen)
                 
@@ -137,10 +156,13 @@ struct PriceCard: View {
 struct SmallCard: View {
     let title:String;
     let textContent:String;
+    
+    let handleEdit: () -> Void
     let price:Float;
+    
     var body: some View {
         ZStack {
-            InnerSmallCard(cardTitle: title, textContent: textContent, price: price)
+            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, price: price)
         }
     }
 }
