@@ -41,12 +41,13 @@ struct CoreDataController {
         }
     }
     
-    func editItem(item: SubscriptionModel, newName: String, newNotes: String, newDate: Date, newCurrencyType: String, newPrice: Float) {
+    func editItem(item: SubscriptionModel, newName: String, newNotes: String, newDate: Date, newCurrencyType: String, newPrice: Float, newPeriod:Interval) {
         item.name = newName
         item.notes = newNotes
         item.price = newPrice
         item.selectedCurrency = newCurrencyType
         item.subDate = newDate
+        item.period = newPeriod.rawValue
         
         let context = container.viewContext
         

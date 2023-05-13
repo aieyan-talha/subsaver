@@ -56,7 +56,7 @@ struct ContentView: View {
                     .font(.system(size: 40)).foregroundColor(.white).frame(width: 240, height: 96).multilineTextAlignment(.center)
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
-                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
+                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", handleEdit: {
                             self.handleEditSubscription(id: sub.id)
                         }, price: sub.price).transition(.slide)
                             .animation(.easeInOut(duration: 0.4))
