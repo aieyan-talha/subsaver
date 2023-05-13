@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E2FA052A0FEC75000435C6 /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA042A0FEC75000435C6 /* FloatExtension.swift */; };
+		18E2FA072A0FEC9B000435C6 /* GradiantExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA062A0FEC9B000435C6 /* GradiantExtension.swift */; };
+		18E2FA092A0FECE8000435C6 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA082A0FECE8000435C6 /* ColorExtension.swift */; };
+		18E2FA0C2A0FED3C000435C6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA0B2A0FED3C000435C6 /* OptionsView.swift */; };
+		18E2FA0E2A0FEE77000435C6 /* TotalMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA0D2A0FEE77000435C6 /* TotalMoneyView.swift */; };
+		18E2FA102A0FEE96000435C6 /* WelcomeToptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA0F2A0FEE96000435C6 /* WelcomeToptView.swift */; };
+		18E2FA122A0FEEB0000435C6 /* FilterContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2FA112A0FEEB0000435C6 /* FilterContentView.swift */; };
 		2821EBB02A09E9550031C91C /* CreateAndEditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2821EBAF2A09E9550031C91C /* CreateAndEditCardView.swift */; };
 		289D33EF2A062D7F002ADAF7 /* SubSaverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D33EE2A062D7F002ADAF7 /* SubSaverApp.swift */; };
 		289D33F12A062D7F002ADAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D33F02A062D7F002ADAF7 /* ContentView.swift */; };
@@ -21,6 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E2FA042A0FEC75000435C6 /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
+		18E2FA062A0FEC9B000435C6 /* GradiantExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradiantExtension.swift; sourceTree = "<group>"; };
+		18E2FA082A0FECE8000435C6 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		18E2FA0B2A0FED3C000435C6 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		18E2FA0D2A0FEE77000435C6 /* TotalMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMoneyView.swift; sourceTree = "<group>"; };
+		18E2FA0F2A0FEE96000435C6 /* WelcomeToptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeToptView.swift; sourceTree = "<group>"; };
+		18E2FA112A0FEEB0000435C6 /* FilterContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterContentView.swift; sourceTree = "<group>"; };
 		2821EBAF2A09E9550031C91C /* CreateAndEditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndEditCardView.swift; sourceTree = "<group>"; };
 		289D33EB2A062D7F002ADAF7 /* SubSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		289D33EE2A062D7F002ADAF7 /* SubSaverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSaverApp.swift; sourceTree = "<group>"; };
@@ -46,6 +60,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E2FA032A0FEC5F000435C6 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				18E2FA042A0FEC75000435C6 /* FloatExtension.swift */,
+				18E2FA062A0FEC9B000435C6 /* GradiantExtension.swift */,
+				18E2FA082A0FECE8000435C6 /* ColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		18E2FA0A2A0FED1F000435C6 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				18E2FA0B2A0FED3C000435C6 /* OptionsView.swift */,
+				18E2FA0D2A0FEE77000435C6 /* TotalMoneyView.swift */,
+				18E2FA0F2A0FEE96000435C6 /* WelcomeToptView.swift */,
+				18E2FA112A0FEEB0000435C6 /* FilterContentView.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		289D33E22A062D7F002ADAF7 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +100,8 @@
 		289D33ED2A062D7F002ADAF7 /* SubSaver */ = {
 			isa = PBXGroup;
 			children = (
+				18E2FA032A0FEC5F000435C6 /* Extension */,
+				18E2FA0A2A0FED1F000435C6 /* Filter */,
 				28EA014E2A0CCB070052DDE5 /* Models */,
 				FDD3664F2A06714200BFA777 /* LocalNotifications.swift */,
 				FDD3664D2A0670D200BFA777 /* LocalMemory.swift */,
@@ -167,13 +204,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				2821EBB02A09E9550031C91C /* CreateAndEditCardView.swift in Sources */,
+				18E2FA092A0FECE8000435C6 /* ColorExtension.swift in Sources */,
+				18E2FA102A0FEE96000435C6 /* WelcomeToptView.swift in Sources */,
 				FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */,
 				28EA014D2A0CB6060052DDE5 /* CoreDataController.swift in Sources */,
+				18E2FA0E2A0FEE77000435C6 /* TotalMoneyView.swift in Sources */,
 				289D33F12A062D7F002ADAF7 /* ContentView.swift in Sources */,
 				28EA014B2A0CB0B50052DDE5 /* SubModel.xcdatamodeld in Sources */,
+				18E2FA052A0FEC75000435C6 /* FloatExtension.swift in Sources */,
 				FDD3664C2A06701500BFA777 /* CardView.swift in Sources */,
+				18E2FA0C2A0FED3C000435C6 /* OptionsView.swift in Sources */,
 				FDD366502A06714200BFA777 /* LocalNotifications.swift in Sources */,
 				28EA01502A0CCB230052DDE5 /* SubscriptionItem.swift in Sources */,
+				18E2FA072A0FEC9B000435C6 /* GradiantExtension.swift in Sources */,
+				18E2FA122A0FEEB0000435C6 /* FilterContentView.swift in Sources */,
 				289D33EF2A062D7F002ADAF7 /* SubSaverApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
