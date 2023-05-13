@@ -30,6 +30,11 @@ func updateTriggerTime(time: Date) {
         let calendar = Calendar.current
         updateNotificationTime(hour: calendar.component(.hour, from: time), minute: calendar.component(.minute, from: time))
 }
+
+func deleteNotification(id:UUID) {
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id.uuidString])
+    print("deleted a notification")
+}
     
 func updateNotificationTime(hour: Int, minute: Int) {
     // Get the shared instance of UNUserNotificationCenter
