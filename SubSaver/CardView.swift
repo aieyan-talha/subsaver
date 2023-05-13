@@ -25,6 +25,7 @@ struct InnerSmallCard: View {
     let cardTitle:String;
     let textContent:String;
     let handleEdit: () -> Void
+    let handleDelete: () -> Void
     let price:Float;
     
     @State var isOpen:Bool = false;
@@ -36,13 +37,14 @@ struct InnerSmallCard: View {
     var body: some View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: (!isOpen ? CLOSED_HEIGHT : HEIGHT)).cornerRadius(20).foregroundStyle(backgroundGradient)
-        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
+        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, handleDelete: handleDelete, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
     }
 }
 
 struct TitleCard: View {
     let cardTitle:String;
     let handleEdit: () -> Void
+    let handleDelete: () -> Void
     
     let backgroundGradient = LinearGradient(
         gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
@@ -59,11 +61,14 @@ struct TitleCard: View {
                 Text(cardTitle).font(.system(size: 24, weight: Font.Weight.bold)).foregroundColor(.white)
                 
                 Spacer()
-//<<<<<<< HEAD
-//
-//            }.padding().frame(width: 336, height: 64)
-//=======
-//
+
+                Button(action: {
+                    handleDelete()
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                }
                 Button(action: {
                     handleEdit()
                 }) {
@@ -158,11 +163,12 @@ struct SmallCard: View {
     let textContent:String;
     
     let handleEdit: () -> Void
+    let handleDelete: () -> Void
     let price:Float;
     
     var body: some View {
         ZStack {
-            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, price: price)
+            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, handleDelete: handleDelete, price: price)
         }
     }
 }

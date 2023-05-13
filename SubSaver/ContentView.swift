@@ -14,6 +14,9 @@ let backgroundColorGradient = RadialGradient(
 
 struct ContentView: View {
     @State var showCreateForm: Bool = false
+    @State var showConfirmationDialog: Bool = false
+    @State var deleteSubscriptionId: String = ""
+    
     @State var searchText:String = "";
     @State var isEditingSubscription: Bool = false
     @State var editingSubscriptionId: String = ""
@@ -36,6 +39,22 @@ struct ContentView: View {
             self.editingSubscriptionId = subId.uuidString
             self.showCreateForm.toggle()
         }
+    }
+    
+    func handleDeleteClick(id: UUID?) {
+        if let subId = id {
+            self.deleteSubscriptionId = subId.uuidString
+            showConfirmationDialog.toggle()
+        }
+    }
+    
+    func handleDeleteSubscription() {
+        let filteredSubs = subs.filter { sub in
+            sub.id == UUID(uuidString: deleteSubscriptionId)
+        }
+        
+        CoreDataController.shared.deleteItem(item: filteredSubs[0])
+        self.deleteSubscriptionId = ""
     }
     
     var body: some View {
@@ -77,20 +96,26 @@ struct ContentView: View {
                     .font(.system(size: 40)).foregroundColor(.white).frame(width: 240, height: 96).multilineTextAlignment(.center)
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
+
                         if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
                             SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
-                                self.handleEditSubscription(id: sub.id)
-                            }, price: sub.price).transition(.slide)
-                                .animation(.easeInOut(duration: 0.4))
+                            self.handleEditSubscription(id: sub.id)
+                        }, handleDelete: {
+                            self.handleDeleteClick(id: sub.id)
+                        }, price: sub.price).transition(.slide)
+                            .animation(.easeInOut(duration: 0.4))
                         }
                     }
                     
                     TimeAndDateNotificationExample()
                 }
-                
-                
             }
             .padding()
+            .confirmationDialog("Deleting Subscription", isPresented: $showConfirmationDialog, actions: {
+                Button("Delete", role: .destructive, action: handleDeleteSubscription)
+            }, message: {
+                Text("This will delete the subscription from the list. Please note that this action cannot be undone")
+            })
         }.fullScreenCover(isPresented: $showCreateForm) {
             GeometryReader { geo in
                 ZStack{
