@@ -66,6 +66,10 @@ struct CreateAndEditCardView: View {
         showPopup.toggle()
     }
     
+    func submittable() -> Bool {
+        return self.username.count > 0
+    }
+    
     func setDefaultValues() {
         self.buttonText = "Save"
         self.headerText = "Add Subscription"
@@ -125,11 +129,12 @@ struct CreateAndEditCardView: View {
                 Text(buttonText)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(submittable() ? Color.blue : Color.gray)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                    
 
-            }.padding()
+            }.padding().disabled(!submittable())
             
         }.background(.purple)
             .cornerRadius(10)
@@ -199,13 +204,21 @@ struct BasicTextEditor: View {
 
     }
 }
+private var decimalFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 0
+        formatter.minimum = 0
+        return formatter
+    }
 
 struct NumericTextField: View {
     @Binding var fieldName: Float
     @State var placeholder: String
     
     var body: some View {
-        TextField(placeholder, value: $fieldName, formatter: NumberFormatter())
+        TextField(placeholder, value: $fieldName, formatter: decimalFormatter)
             .keyboardType(.decimalPad)
             .padding(10)
             .font(.system(size: 24))
