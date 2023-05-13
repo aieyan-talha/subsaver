@@ -57,4 +57,16 @@ struct CoreDataController {
         }
     }
     
+    func deleteItem(item: SubscriptionModel) {
+        let context = container.viewContext
+        
+        context.delete(item)
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print ("Error deleting item: \(error)")
+        }
+    }
+    
 }

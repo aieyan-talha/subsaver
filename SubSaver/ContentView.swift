@@ -14,6 +14,8 @@ let backgroundColorGradient = RadialGradient(
 
 struct ContentView: View {
     @State var showCreateForm: Bool = false
+    @State var showConfirmationDialog: Bool = false
+    @State var deleteSubscriptionId: String = ""
     
     @State var isEditingSubscription: Bool = false
     @State var editingSubscriptionId: String = ""
@@ -37,6 +39,22 @@ struct ContentView: View {
         }
     }
     
+    func handleDeleteClick(id: UUID?) {
+        if let subId = id {
+            self.deleteSubscriptionId = subId.uuidString
+            showConfirmationDialog.toggle()
+        }
+    }
+    
+    func handleDeleteSubscription() {
+        let filteredSubs = subs.filter { sub in
+            sub.id == UUID(uuidString: deleteSubscriptionId)
+        }
+        
+        CoreDataController.shared.deleteItem(item: filteredSubs[0])
+        self.deleteSubscriptionId = ""
+    }
+    
     var body: some View {
         ZStack {
             backgroundColorGradient.ignoresSafeArea()
@@ -58,16 +76,21 @@ struct ContentView: View {
                     ForEach(subs, id: \.self) { sub in
                         SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
                             self.handleEditSubscription(id: sub.id)
+                        }, handleDelete: {
+                            self.handleDeleteClick(id: sub.id)
                         }, price: sub.price).transition(.slide)
                             .animation(.easeInOut(duration: 0.4))
                     }
                     
                     TimeAndDateNotificationExample()
                 }
-                
-                
             }
             .padding()
+            .confirmationDialog("Deleting Subscription", isPresented: $showConfirmationDialog, actions: {
+                Button("Delete", role: .destructive, action: handleDeleteSubscription)
+            }, message: {
+                Text("This will delete the subscription from the list. Please note that this action cannot be undone")
+            })
         }.fullScreenCover(isPresented: $showCreateForm) {
             GeometryReader { geo in
                 ZStack{
