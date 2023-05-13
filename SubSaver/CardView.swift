@@ -38,7 +38,7 @@ struct InnerSmallCard: View {
     var body: some View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: (!isOpen ? CLOSED_HEIGHT : HEIGHT)).cornerRadius(20).foregroundStyle(backgroundGradient)
-        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, period: period, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
+        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, handleDelete: handleDelete, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, period: period, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
     }
 }
 
@@ -171,7 +171,7 @@ struct SmallCard: View {
     
     var body: some View {
         ZStack {
-            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, period: Interval(rawValue: period) ?? .weekly, price: price)
+            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, period: Interval(rawValue: period) ?? .weekly, handleDelete: handleDelete, price: price)
         }
     }
 }
