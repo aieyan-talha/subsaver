@@ -15,7 +15,6 @@
 		28EA014B2A0CB0B50052DDE5 /* SubModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28EA01492A0CB0B50052DDE5 /* SubModel.xcdatamodeld */; };
 		28EA014D2A0CB6060052DDE5 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EA014C2A0CB6060052DDE5 /* CoreDataController.swift */; };
 		28EA01502A0CCB230052DDE5 /* SubscriptionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */; };
-		FDC718592A0F3AE700BA5831 /* down-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC718582A0F3AE700BA5831 /* down-arrow.png */; };
 		FDD3664C2A06701500BFA777 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664B2A06701500BFA777 /* CardView.swift */; };
 		FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664D2A0670D200BFA777 /* LocalMemory.swift */; };
 		FDD366502A06714200BFA777 /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664F2A06714200BFA777 /* LocalNotifications.swift */; };
@@ -31,7 +30,6 @@
 		28EA014A2A0CB0B50052DDE5 /* SubModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SubModel.xcdatamodel; sourceTree = "<group>"; };
 		28EA014C2A0CB6060052DDE5 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionItem.swift; sourceTree = "<group>"; };
-		FDC718582A0F3AE700BA5831 /* down-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-arrow.png"; path = "../../../../../Desktop/down-arrow.png"; sourceTree = "<group>"; };
 		FDD3664B2A06701500BFA777 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		FDD3664D2A0670D200BFA777 /* LocalMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMemory.swift; sourceTree = "<group>"; };
 		FDD3664F2A06714200BFA777 /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */,
-				FDC718582A0F3AE700BA5831 /* down-arrow.png */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,7 +155,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				289D33F62A062D80002ADAF7 /* Preview Assets.xcassets in Resources */,
-				FDC718592A0F3AE700BA5831 /* down-arrow.png in Resources */,
 				289D33F32A062D80002ADAF7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

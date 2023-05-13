@@ -71,8 +71,8 @@ struct TitleCard: View {
                         .foregroundColor(.white)
                         .font(.title2)
                 }
-//                Image("down-arrow").resizable().colorInvert().scaledToFit().frame(width:25, height:25)
-//                    .rotationEffect(.degrees(!isOpen ? 180 : 0)).transition(.slide).animation(.easeInOut, value: isOpen)
+                Image("down-arrow").resizable().colorInvert().scaledToFit().frame(width:25, height:25)
+                    .rotationEffect(.degrees(!isOpen ? 180 : 0)).transition(.slide).animation(.easeInOut, value: isOpen)
                 
             }.padding().frame(width: WIDTH-20, height: 64)
         }.onTapGesture {
