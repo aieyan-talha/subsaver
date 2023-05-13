@@ -26,6 +26,7 @@ struct InnerSmallCard: View {
     let textContent:String;
     let handleEdit: () -> Void
     let period: Interval;
+    let handleDelete: () -> Void
     let price:Float;
     
     @State var isOpen:Bool = false;
@@ -44,6 +45,7 @@ struct InnerSmallCard: View {
 struct TitleCard: View {
     let cardTitle:String;
     let handleEdit: () -> Void
+    let handleDelete: () -> Void
     
     let backgroundGradient = LinearGradient(
         gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
@@ -60,11 +62,14 @@ struct TitleCard: View {
                 Text(cardTitle).font(.system(size: 24, weight: Font.Weight.bold)).foregroundColor(.white)
                 
                 Spacer()
-//<<<<<<< HEAD
-//
-//            }.padding().frame(width: 336, height: 64)
-//=======
-//
+
+                Button(action: {
+                    handleDelete()
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                }
                 Button(action: {
                     handleEdit()
                 }) {
@@ -161,6 +166,7 @@ struct SmallCard: View {
     let period:String;
     
     let handleEdit: () -> Void
+    let handleDelete: () -> Void
     let price:Float;
     
     var body: some View {
