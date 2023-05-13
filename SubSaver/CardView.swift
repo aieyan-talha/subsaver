@@ -8,9 +8,12 @@
 import SwiftUI
 import UserNotifications
 
-let HEIGHT:CGFloat = 192;
-let CLOSED_HEIGHT:CGFloat = 120;
+let HEIGHT:CGFloat = 280;
+let CLOSED_HEIGHT:CGFloat = 160;
 let WIDTH:CGFloat = 376;
+let backgroundGradient = LinearGradient(
+    gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
+    startPoint: .leading, endPoint: .trailing)
 
 struct OuterCard: View {
     var body: some View {
@@ -38,9 +41,7 @@ struct InnerSmallCard: View {
 struct TitleCard: View {
     let cardTitle:String;
     @Binding var isOpen:Bool;
-    let backgroundGradient = LinearGradient(
-        gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
-        startPoint: .leading, endPoint: .trailing)
+    
     
     var body: some View {
         ZStack{
@@ -69,10 +70,18 @@ struct ContentCard: View {
     let initialWidth:CGFloat = 50;
     var body: some View {
         VStack {
-            //Text(textContent).font(.system(size: 16)).foregroundColor(.white)
-            Text(String(price)).font(.system(size: 16)).foregroundColor(.white)
+            Text("Your next payment is on xxxxx").font(.system(size: 16)).foregroundColor(.white)
+            if (!isOpen) {
+                PriceCard(price:price, interval: .weekly)
+            }
             Spacer()
-        }.padding(4).frame(width:initialWidth, height: (!isOpen ? CLOSED_HEIGHT-64 : HEIGHT-64))
+            if (isOpen) {
+                PriceCard(price:price, interval: .weekly)
+                PriceCard(price:price*4, interval: .monthly)
+                PriceCard(price:price*52, interval: .annually)
+                Text(textContent).font(.system(size: 16)).foregroundColor(.white)
+            }
+        }.padding(4).frame(width:WIDTH-20, height: (!isOpen ? CLOSED_HEIGHT-64 : HEIGHT-64))
     }
 }
 
@@ -90,6 +99,38 @@ struct RoundedCorner: Shape {
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
+    }
+}
+
+enum Interval {
+    case weekly
+    case monthly
+    case annually
+}
+
+struct PriceCard: View {
+    var price:Float;
+    var interval:Interval;
+    let PRICEHEIGHT:CGFloat = 36;
+    let PRICEWIDTH:CGFloat = 348;
+    
+    var body: some View {
+        ZStack {
+            Rectangle().frame(width: PRICEWIDTH, height: PRICEHEIGHT).cornerRadius(20).foregroundStyle(backgroundGradient)
+            Text("Total \(intervalString(interval)): $\(String(format: "%.2f", price))").font(.system(size: 16)).foregroundColor(.white)
+        }
+        
+    }
+    
+    func intervalString(_ period:Interval) -> String {
+        switch period {
+            case .weekly:
+                return "Weekly"
+            case .monthly:
+                return "Monthly"
+            case .annually:
+                return "Annually"
+            }
     }
 }
 
