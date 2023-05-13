@@ -35,6 +35,8 @@ struct Subscription: Codable, Hashable {
     }
 }
 
+
+
 class ScoreStore {
     let key = "subscriptions"
     

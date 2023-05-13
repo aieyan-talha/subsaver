@@ -60,6 +60,7 @@ struct CreateAndEditCardView: View {
             subscription.notes = notes
             
             CoreDataController.shared.save()
+            createNotification(id: randomId, name: username, subDate: subDate, period: period.rawValue, price: price)
         }
     }
     

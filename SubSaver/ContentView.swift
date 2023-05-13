@@ -107,7 +107,7 @@ struct TimeAndDateNotificationExample: View {
             DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
                 .labelsHidden()
             Button("Click to apply notification to ping on this date/time") {
-                createNotification("Notification!", "THIS IS A TEST", selectedTime)
+                updateTriggerTime(time: selectedTime)
                 
             }
         }

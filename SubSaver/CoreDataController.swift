@@ -50,7 +50,7 @@ struct CoreDataController {
         item.period = newPeriod.rawValue
         
         let context = container.viewContext
-        
+        createNotification(id: item.id!, name: newName, subDate: newDate, period: newPeriod.rawValue, price: newPrice)
         do {
             try context.save()
         } catch let error as NSError {
