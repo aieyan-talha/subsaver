@@ -7,11 +7,15 @@
 
 import SwiftUI
 
+let backgroundColorGradient = RadialGradient(
+    gradient: Gradient(colors: [Color(red: 0.176, green: 0.424, blue: 0.875).opacity(1), Color.white.opacity(0)]),
+    center: .center, startRadius: 0, endRadius: 500)
 struct ContentView: View {
     @State var showCreateForm: Bool = false
-    @State var someVal: Int = 0
+    @State var totalPrice:Float = 52.00;
+    //@State var someVal: Int = 0
     
-    @State var fieldName: String = ""
+    //@State var fieldName: String = ""
     
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -25,6 +29,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            backgroundColorGradient.ignoresSafeArea()
             VStack {
                 Button(action: handleCreateButton) {
                     Text("+").font(.custom("Cambria", size: 20))
@@ -33,6 +38,8 @@ struct ContentView: View {
                     .foregroundColor(.white)
                     .cornerRadius(40)
                 
+                Text("Total/Weekly $\(String(format: "%.2f", totalPrice))")
+                    .font(.system(size: 40)).foregroundColor(.white).frame(width: 240, height: 96).multilineTextAlignment(.center)
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
                         SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "")
