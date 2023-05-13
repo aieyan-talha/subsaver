@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var showCreateForm: Bool = false
-    @State var someVal: Int = 0
-    
-    @State var fieldName: String = ""
+    @State var isEditingSubscription: Bool = false
+    @State var editingSubscriptionId: String = ""
     
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -23,11 +22,23 @@ struct ContentView: View {
         showCreateForm.toggle()
     }
     
+    func handleEditSubscription(id: UUID?) {
+        if let subId = id {
+            self.isEditingSubscription = true
+            self.editingSubscriptionId = subId.uuidString
+            self.showCreateForm.toggle()
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack {
                 Button(action: handleCreateButton) {
-                    Text("+").font(.custom("Cambria", size: 20))
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 15)
                 }.frame(width: 50, height: 50)
                     .background(.blue)
                     .foregroundColor(.white)
@@ -35,7 +46,9 @@ struct ContentView: View {
                 
                 ScrollView {
                     ForEach(subs, id: \.self) { sub in
-                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "")
+                        SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", handleEdit: {
+                            self.handleEditSubscription(id: sub.id)
+                        })
                     }
                     
                     TimeAndDateNotificationExample()
@@ -47,7 +60,7 @@ struct ContentView: View {
         }.fullScreenCover(isPresented: $showCreateForm) {
             GeometryReader { geo in
                 ZStack{
-                    CreateAndEditCardView(showPopup: $showCreateForm)
+                    CreateAndEditCardView(showPopup: $showCreateForm, isEditingSubscription: $isEditingSubscription, editingSubscriptionId: $editingSubscriptionId)
                 }.frame(height: geo.size.height)
                     .background(BackgroundBlurView())
                     

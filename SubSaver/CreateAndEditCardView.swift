@@ -11,39 +11,79 @@ import CoreData
 
 struct CreateAndEditCardView: View {
     @Binding var showPopup: Bool
+    @Binding var isEditingSubscription: Bool
+    @Binding var editingSubscriptionId: String
+
+    
     @State private var username: String = ""
     @State private var subDate = Date.now
     @State private var price: Float = 0
     @State private var notes: String = ""
     @State var currencySelected: String = "USD"
     
+    @State var edtitingSubscriptionItem: SubscriptionModel? = nil
+    
+    @State var buttonText: String = "Save"
+    @State var headerText: String = "Add Subscription"
+    
     let currencyOptions: [String] = ["USD", "AUD", "YEN"]
+    
+    
+   
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @FetchRequest(
+        entity: SubscriptionModel.entity(),
+        sortDescriptors: []
+    ) var subs: FetchedResults<SubscriptionModel>
+    
     func handleSaveButton() {
-        print("BUTTON PRESSED")
         showPopup.toggle()
         
-        let subscription = SubscriptionModel(context: managedObjectContext)
-        let randomId = UUID()
-        
-        subscription.id = randomId
-        subscription.name = username
-        subscription.subDate = subDate
-        subscription.selectedCurrency = currencySelected
-        subscription.price = price
-        subscription.notes = notes
-        
-        CoreDataController.shared.save()
+        if (isEditingSubscription) {
+            CoreDataController.shared.editItem(item: edtitingSubscriptionItem!, newName: username, newNotes: notes, newDate: subDate, newCurrencyType: currencySelected, newPrice: price)
+            
+            isEditingSubscription.toggle()
+            editingSubscriptionId = ""
+        } else {
+            let subscription = SubscriptionModel(context: managedObjectContext)
+            let randomId = UUID()
+            
+            subscription.id = randomId
+            subscription.name = username
+            subscription.subDate = subDate
+            subscription.selectedCurrency = currencySelected
+            subscription.price = price
+            subscription.notes = notes
+            
+            CoreDataController.shared.save()
+        }
+    }
+    
+    func closeForm () {
+        setDefaultValues()
+        showPopup.toggle()
+    }
+    
+    func setDefaultValues() {
+        self.buttonText = "Save"
+        self.headerText = "Add Subscription"
+        isEditingSubscription = false
+        editingSubscriptionId = ""
     }
     
     var body: some View {
         VStack {
             HStack {
-                Text("Add Subsciption")
+                Text(headerText)
                     .font(.system(size: 20, weight: .bold))
                 Spacer()
+                Button(action: closeForm) {
+                    Image(systemName: "multiply")
+                        .foregroundColor(.white)
+                        .font(.title)
+                }
             }.padding()
                 .background(.blue)
             HStack {
@@ -82,7 +122,7 @@ struct CreateAndEditCardView: View {
             BasicTextEditor(fieldName: $notes, text: "Notes")
         
             Button(action: handleSaveButton) {
-                Text("Save")
+                Text(buttonText)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
@@ -94,6 +134,32 @@ struct CreateAndEditCardView: View {
         }.background(.purple)
             .cornerRadius(10)
             .padding()
+            .onAppear {
+                if (isEditingSubscription) {
+                    self.buttonText = "Update"
+                    self.headerText = "Edit Subscription"
+                    
+                    let filteredSubs = subs.filter { sub in
+                        sub.id == UUID(uuidString: editingSubscriptionId)
+                    }
+                    
+                    if filteredSubs.count > 0 {
+                        let sub = filteredSubs[0]
+                        
+                        self.username = sub.name ?? ""
+                        self.price = sub.price
+                        self.notes = sub.notes ?? ""
+                        self.subDate = sub.subDate!
+                        self.currencySelected = sub.selectedCurrency ?? ""
+                        
+                        self.edtitingSubscriptionItem = sub
+                    }
+                    
+                } else {
+                    self.buttonText = "Save"
+                    self.headerText = "Add Subscription"
+                }
+            }
     }
 }
 
@@ -124,8 +190,6 @@ struct BasicTextEditor: View {
         }.padding(.horizontal)
         TextEditor(text: $fieldName)
             .frame(height: 100)
-//            .background(.red)
-//            .border(.black)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
