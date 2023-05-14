@@ -70,6 +70,7 @@ struct ContentView: View {
     
     func handleDeleteClick(id: UUID?) {
         if let subId = id {
+            deleteNotification(id: id!)
             self.deleteSubscriptionId = subId.uuidString
             showConfirmationDialog.toggle()
         }
@@ -134,10 +135,11 @@ struct ContentView: View {
                         Button(action: {
                             isNavPushFilter = true
                         }) {
-                            Text("Click Filter").font(.system(size: 25))
-                        }.frame(width: 120,
-                                alignment: .center)
-                            .foregroundColor(.white)
+                            Image("gear")
+                                .resizable()
+                                .frame(width: 60 , height: 60
+                            )
+                        }
                     }
                     ScrollView {
                         LazyVStack {
@@ -165,6 +167,7 @@ struct ContentView: View {
                             
                             Rectangle().fill(.black)
                             
+
                             LinearGradient(
                                 gradient:Gradient(
                                   colors: [Color.black.opacity(0), Color.black]),

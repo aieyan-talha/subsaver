@@ -60,13 +60,19 @@ struct TitleCard: View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: 64).cornerRadius(20, corners: [.topLeft, .topRight]).foregroundStyle(backgroundGradient)
             HStack(spacing: 10) {
-                Rectangle().frame(width:52, height: 52).cornerRadius(2).foregroundColor(.blue)
+                ZStack {
+                    Rectangle().frame(width:52, height: 52).cornerRadius(2).foregroundColor(.blue).cornerRadius(10)
+                    
+                    Text(String(cardTitle.first!)).font(.system(size: 40, weight: Font.Weight.bold)).foregroundColor(.white).shadow(radius: 2)
+                }
+               
                 Text(cardTitle).font(.system(size: 24, weight: Font.Weight.bold)).foregroundColor(.white)
                 
                 Spacer()
 
                 Button(action: {
                     handleDelete()
+                    
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.white)
