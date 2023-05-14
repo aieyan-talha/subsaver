@@ -98,7 +98,10 @@ struct ContentView: View {
                     
                     ZStack {
                         HStack {
-                            TextField("Search", text: $searchText).padding().frame(width: 300, height: 24).font(.system(size: 16)).background(
+                            TextField("Search", text: $searchText).onTapGesture {
+                                // Dismiss the keyboard
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            }.padding().frame(width: 320, height: 44).font(.system(size: 16)).background(
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(Color.gray.opacity(0.2), lineWidth: 1)
                             )
@@ -114,7 +117,7 @@ struct ContentView: View {
                             .animation(.default)
                             .padding(.trailing, 8)
                         }
-                    }.frame(width: 300, height: 24)
+                    }.frame(width: 320, height: 44)
                     
                     Button(action: handleCreateButton) {
                         Image(systemName: "plus")
@@ -137,10 +140,9 @@ struct ContentView: View {
                         }) {
                             Image("gear")
                                 .resizable()
-                                .frame(width: 60 , height: 60
-                            )
-                        }
-                    }
+                                .frame(width: 44 , height: 44
+                            )                        }
+                    }.padding()
                     ScrollView {
                         LazyVStack {
                             ForEach(subs, id: \.self) { sub in
@@ -194,6 +196,9 @@ struct ContentView: View {
                         .background(BackgroundBlurView())
                     
                 }
+            }.onTapGesture {
+                // Dismiss the keyboard
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
     }

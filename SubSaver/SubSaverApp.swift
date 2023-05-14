@@ -18,6 +18,8 @@ struct SubSaverApp: App {
     }
     
     init() {
+        // Set the accent color
+        UITextField.appearance().backgroundColor = .clear;
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
                 print("All set!")
