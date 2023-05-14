@@ -163,7 +163,7 @@ struct ContentView: View {
                                 gradient:Gradient(
                                   colors: [Color.black.opacity(0), Color.black]),
                                   startPoint: .top, endPoint: .bottom
-                              ).frame(height: 10)
+                              ).frame(height: 5)
                             
                             Rectangle().fill(.black)
                             
