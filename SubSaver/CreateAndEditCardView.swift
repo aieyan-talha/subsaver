@@ -178,6 +178,9 @@ struct CreateAndEditCardView: View {
                     self.buttonText = "Save"
                     self.headerText = "Add Subscription"
                 }
+            }.onTapGesture {
+                // Dismiss the keyboard
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
     }
 }
@@ -192,9 +195,10 @@ struct BasicTextField: View {
             Text(text).foregroundColor(.white)
             Spacer()
         }.padding(.horizontal)
-        TextField(placeholder, text: $fieldName)
-            .padding(.horizontal)
-            .textFieldStyle(.roundedBorder)
+        TextField(placeholder, text: $fieldName).foregroundColor(.white).onTapGesture {
+            // Dismiss the keyboard
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }.textFieldStyle(.roundedBorder).background(titleGradient).shadow(radius: 2).frame(width:300).cornerRadius(10)
     }
 }
 
@@ -204,17 +208,17 @@ struct BasicTextEditor: View {
     
     var body: some View {
         HStack {
-            Text(text)
+            Text(text).foregroundColor(.white)
             Spacer()
         }.padding(.horizontal)
-        TextEditor(text: $fieldName)
-            .frame(height: 100)
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.clear, lineWidth: 2)
-            )
-            .padding(.horizontal)
+        TextEditor(text: $fieldName).scrollContentBackground(.hidden).background(titleGradient).foregroundColor(.white)
+                .frame(height: 100).shadow(radius: 2)
+                .cornerRadius(10)
+                .onTapGesture {
+                    // Dismiss the keyboard
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                .padding(.horizontal)
 
     }
 }
@@ -235,9 +239,11 @@ struct NumericTextField: View {
         TextField(placeholder, value: $fieldName, formatter: decimalFormatter)
             .keyboardType(.decimalPad)
             .padding(10)
+            .foregroundColor(.white)
             .font(.system(size: 24))
-            .background(Color.white)
+            .background(titleGradient)
             .cornerRadius(10)
+            .shadow(radius: 2)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(.clear, lineWidth: 2)

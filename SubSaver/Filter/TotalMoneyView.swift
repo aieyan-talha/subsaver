@@ -42,14 +42,13 @@ struct TotalMoneyView: View {
              */
             
             HStack(){
-                Spacer()
-                Spacer()
                 Button(action: {
                     didClickBackBlock?()
                 }) {
-                    Image("goback")
-                }.frame(width: 120)
-            }
+                    Image("goback").resizable()
+                }.frame(width: 60, height: 40)
+                Spacer()
+            }.padding()
             .frame(height: 150)
             
         }
