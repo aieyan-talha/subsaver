@@ -134,10 +134,11 @@ struct ContentView: View {
                         Button(action: {
                             isNavPushFilter = true
                         }) {
-                            Text("Click Filter").font(.system(size: 25))
-                        }.frame(width: 120,
-                                alignment: .center)
-                            .foregroundColor(.white)
+                            Image("gear")
+                                .resizable()
+                                .frame(width: 60 , height: 60
+                            )
+                        }
                     }
                     ScrollView {
                         ForEach(subs, id: \.self) { sub in

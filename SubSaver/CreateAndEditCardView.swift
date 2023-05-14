@@ -27,7 +27,7 @@ struct CreateAndEditCardView: View {
     @State var buttonText: String = "Save"
     @State var headerText: String = "Add Subscription"
     
-    let currencyOptions: [String] = ["USD", "AUD", "YEN"]
+   // let currencyOptions: [String] = ["USD", "AUD", "YEN"]
     
     
    
@@ -117,22 +117,19 @@ struct CreateAndEditCardView: View {
                 Spacer()
             }.padding(.horizontal)
             HStack {
-                Picker("Select an option", selection: $currencySelected) {
-                    ForEach(currencyOptions, id: \.self) { currency in
-                        Text(currency)
-                    }
-                }.pickerStyle(.menu)
-                    .padding(.vertical, 8)
+                Text("$AUD")
                     .font(.system(size: 24))
-                    .background(Color.white)
+                    .padding(.vertical, 8)
+                    .background(Color.purple)
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.clear, lineWidth: 2)
                     )
                     .padding(.horizontal)
-                NumericTextField(fieldName: $price, placeholder: "$").padding(.horizontal)
+                NumericTextField(fieldName: $price, placeholder: "").padding(.horizontal)
             }
+
             BasicTextEditor(fieldName: $notes, text: "Notes")
         
             Button(action: handleSaveButton) {
