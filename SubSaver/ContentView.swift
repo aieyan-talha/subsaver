@@ -146,7 +146,7 @@ struct ContentView: View {
                             ForEach(subs, id: \.self) { sub in
                                 
                                 if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
-                                    SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", handleEdit: {
+                                    SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", subDate: sub.subDate!, handleEdit: {
                                         self.handleEditSubscription(id: sub.id)
                                     }, handleDelete: {
                                         self.handleDeleteClick(id: sub.id)
@@ -164,15 +164,21 @@ struct ContentView: View {
                                   colors: [Color.black.opacity(0), Color.black]),
                                   startPoint: .top, endPoint: .bottom
                               ).frame(height: 10)
+                            
                             Rectangle().fill(.black)
+                            
+
                             LinearGradient(
                                 gradient:Gradient(
                                   colors: [Color.black.opacity(0), Color.black]),
                                   startPoint: .bottom, endPoint: .top
                               ).frame(height: 10)
+
                             
-                        }
-                    )
+                        })
+                        
+                        
+                    
                 }
                 .padding()
                 .confirmationDialog("Deleting Subscription", isPresented: $showConfirmationDialog, actions: {
