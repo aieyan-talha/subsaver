@@ -27,6 +27,28 @@ struct ContentView: View {
     @State var isNavPushFilter = false
     @State var defaultSelect: DateType = .week
     
+    private var dataTypeToInterval: Interval {
+        switch defaultSelect {
+        case .week:
+            return .weekly
+        case .month:
+            return .monthly
+        case .year:
+            return .annually
+        }
+    }
+    
+    private var dateTypeString: String {
+        switch defaultSelect {
+        case .week:
+            return "week"
+        case .month:
+            return "month"
+        case .year:
+            return "year"
+        }
+    }
+    
     //Aieyan
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -104,7 +126,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .cornerRadius(40)
                     
-                    Text("Total/Weekly $\(String(format: "%.2f", totalPrice))")
+                    Text("Total/\(dateTypeString) $\(String(format: "%.2f", calculateSpending(subs: subs, withPeriod: dataTypeToInterval)))")
                         .font(.system(size: 40)).foregroundColor(.white).frame(width: 240, height: 96).multilineTextAlignment(.center)
                     //winnie Filter button
                     HStack {

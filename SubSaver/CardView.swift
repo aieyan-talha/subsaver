@@ -102,9 +102,11 @@ struct ContentCard: View {
             }
             Spacer()
             if (isOpen) {
-                PriceCard(price:price, interval: .weekly)
-                PriceCard(price:price*4, interval: .monthly)
-                PriceCard(price:price*52, interval: .annually)
+                PriceCard(price:convertSpending(currentInteval: period, convertedInterval: .weekly, price: price), interval: .weekly)
+                
+                PriceCard(price:convertSpending(currentInteval: period, convertedInterval: .monthly, price: price), interval: .monthly)
+                
+                PriceCard(price:convertSpending(currentInteval: period, convertedInterval: .annually, price: price), interval: .annually)
                 Text(textContent).font(.system(size: 16)).foregroundColor(.white)
             }
         }.padding(4).frame(width:WIDTH-20, height: (!isOpen ? CLOSED_HEIGHT-64 : HEIGHT-64))
