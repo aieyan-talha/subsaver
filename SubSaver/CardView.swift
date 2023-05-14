@@ -65,6 +65,7 @@ struct TitleCard: View {
 
                 Button(action: {
                     handleDelete()
+                    
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.white)

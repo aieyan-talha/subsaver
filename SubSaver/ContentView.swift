@@ -70,6 +70,7 @@ struct ContentView: View {
     
     func handleDeleteClick(id: UUID?) {
         if let subId = id {
+            deleteNotification(id: id!)
             self.deleteSubscriptionId = subId.uuidString
             showConfirmationDialog.toggle()
         }
