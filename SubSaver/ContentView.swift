@@ -140,20 +140,37 @@ struct ContentView: View {
                             .foregroundColor(.white)
                     }
                     ScrollView {
-                        ForEach(subs, id: \.self) { sub in
-                            
-                            if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
-                                SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", handleEdit: {
-                                    self.handleEditSubscription(id: sub.id)
-                                }, handleDelete: {
-                                    self.handleDeleteClick(id: sub.id)
-                                }, price: sub.price).transition(.slide)
-                                    .animation(.easeInOut(duration: 0.4))
+                        LazyVStack {
+                            ForEach(subs, id: \.self) { sub in
+                                
+                                if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
+                                    SmallCard(title: sub.name ?? "", textContent: sub.notes ?? "", period: sub.period ?? "weekly", handleEdit: {
+                                        self.handleEditSubscription(id: sub.id)
+                                    }, handleDelete: {
+                                        self.handleDeleteClick(id: sub.id)
+                                    }, price: sub.price).transition(.slide)
+                                        .animation(.easeInOut(duration: 0.4))
+                                }
                             }
+                        }.frame(width:400)
+                        
+                        
+                    }.mask(
+                        VStack(spacing:0){
+                            LinearGradient(
+                                gradient:Gradient(
+                                  colors: [Color.black.opacity(0), Color.black]),
+                                  startPoint: .top, endPoint: .bottom
+                              ).frame(height: 10)
+                            Rectangle().fill(.black)
+                            LinearGradient(
+                                gradient:Gradient(
+                                  colors: [Color.black.opacity(0), Color.black]),
+                                  startPoint: .bottom, endPoint: .top
+                              ).frame(height: 10)
+                            
                         }
-                        
-                        
-                    }
+                    )
                 }
                 .padding()
                 .confirmationDialog("Deleting Subscription", isPresented: $showConfirmationDialog, actions: {
