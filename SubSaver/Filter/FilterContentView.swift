@@ -33,7 +33,7 @@ struct FilterContentView: View {
         RadialGradient.pageBackgroundRadialGradient
             .overlay(
                 VStack(spacing: -10) {
-                    WelcomeToptView(titleName: "Filtering\n Subscriptitions",
+                    WelcomeToptView(titleName: "Options",
                                     showAddButton: false)
                     Spacer()
                     TotalMoneyView(showMoney: $showMoney,

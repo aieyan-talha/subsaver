@@ -34,16 +34,11 @@ struct OptionsView: View {
                                height: 65)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                    Spacer()
+                   
                 }
                 
-                VStack(spacing: 20){
-                    Text("Your subscriptions are currentlycalculated by per \(dateString).")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("You can choose what would you iike to see on your subscription in your filters")
+                VStack(spacing: 10){
+                    Text("Manage your total price calculation and the time you recieve notifications.")
                         .foregroundColor(.white)
                         .font(.system(size: 20))
                         .multilineTextAlignment(.leading)
@@ -55,9 +50,8 @@ struct OptionsView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }.frame(width: .screenWidth - 40)
                 
-                Spacer()
                 
-                VStack(spacing: 20){
+                VStack(spacing: 10){
                     
                     Button(action: {
                         didClickDataTypeBlock?(.week)
@@ -89,10 +83,29 @@ struct OptionsView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
-                Spacer()
+                
+                
+                TimeAndDateNotificationExample()
             }
         }
     }
 }
 
+struct TimeAndDateNotificationExample: View {
+    
+    @State private var selectedTime = Date()
+    
+    var body: some View {
+        VStack {
+            DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
+                .labelsHidden().background(Color.gray.opacity(0.1)).cornerRadius(10)
+            Button("Change time of pings") {
+                updateTriggerTime(time: selectedTime)
+                
+            }.foregroundColor(.white).padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+        }
+    }
+}
 

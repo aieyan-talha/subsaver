@@ -130,7 +130,7 @@ struct ContentView: View {
                             }
                         }
                         
-                        TimeAndDateNotificationExample()
+                        
                     }
                 }
                 .padding()
@@ -169,19 +169,5 @@ struct ContentView: View {
         }
     }
     
-    struct TimeAndDateNotificationExample: View {
-        
-        @State private var selectedTime = Date()
-        
-        var body: some View {
-            VStack {
-                DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
-                    .labelsHidden()
-                Button("Click to apply notification to ping on this date/time") {
-                    updateTriggerTime(time: selectedTime)
-                    
-                }
-            }
-        }
-    }
+    
 }
