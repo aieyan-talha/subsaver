@@ -49,12 +49,18 @@ func calculateSpending (subs:FetchedResults<SubscriptionModel>, withPeriod:Inter
     
     subs.forEach() {
         sub in
-        let period:Interval = stringToInterval(sub.period!);
-        let price:Float = sub.price;
-        let adjustedPrice = convertSpending(currentInteval: period, convertedInterval: withPeriod, price: price);
-        total = total + adjustedPrice;
+        if let period = sub.period {
+            let interval:Interval = stringToInterval(period);
+            let price:Float = sub.price;
+            let adjustedPrice = convertSpending(currentInteval: interval, convertedInterval: withPeriod, price: price);
+            total = total + adjustedPrice;
+        } else {
+            // handle the case where period is nil
+            print("period is nil")
+        }
     }
     return total;
 }
+
 
 

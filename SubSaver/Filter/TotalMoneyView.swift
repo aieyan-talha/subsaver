@@ -29,30 +29,30 @@ struct TotalMoneyView: View {
     var body: some View {
         VStack {
             /*
-            Text("Total/\(dateTypeString)")
-                .font(.system(size: 50))
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
+             Text("Total/\(dateTypeString)")
+             .font(.system(size: 50))
+             .foregroundColor(.white)
+             .multilineTextAlignment(.center)
+             
+             Text(String(format: "$%.0.2f",
+             showMoney))
+             .font(.system(size: 50))
+             .foregroundColor(.white)
+             .multilineTextAlignment(.center)
+             */
             
-            Text(String(format: "$%.0.2f",
-                        showMoney))
-                .font(.system(size: 50))
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-            */
             HStack(){
+                Spacer()
                 Spacer()
                 Button(action: {
                     didClickBackBlock?()
                 }) {
-                    Text("Back").font(.system(size: 30))
-                }.frame(width: 100,
-                        alignment: .center)
-                    .foregroundColor(.white)
+                    Image("goback")
+                }.frame(width: 120)
             }
+            .frame(height: 150)
             
-        }.frame(height: 250)
-
+        }
     }
+    
 }
-
