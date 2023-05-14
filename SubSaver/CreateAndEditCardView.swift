@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 import CoreData
 
+let titleGradient = LinearGradient(
+    gradient: Gradient(colors: [Color(red: 0.282, green: 0.184, blue: 0.969).opacity(0.75), Color(red: 0.176, green: 0.424, blue: 0.875).opacity(0.65)]),
+    startPoint: .leading, endPoint: .trailing)
+
 struct CreateAndEditCardView: View {
     @Binding var showPopup: Bool
     @Binding var isEditingSubscription: Bool
@@ -84,7 +88,7 @@ struct CreateAndEditCardView: View {
         VStack {
             HStack {
                 Text(headerText)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: 20, weight: .bold)).foregroundColor(.white)
                 Spacer()
                 Button(action: closeForm) {
                     Image(systemName: "multiply")
@@ -92,10 +96,10 @@ struct CreateAndEditCardView: View {
                         .font(.title)
                 }
             }.padding()
-                .background(.blue)
+                .background(titleGradient)
             HStack {
                 Text("Information Details")
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.system(size: 18, weight: .bold)).foregroundColor(.white)
                 Spacer()
             }.padding(.horizontal)
                 .padding(.vertical, 5)
@@ -103,6 +107,7 @@ struct CreateAndEditCardView: View {
             BasicTextField(fieldName: $username, text: "Subscription Name", placeholder: "Name")
             DatePicker(selection: $subDate, displayedComponents: [.date]) {
                 Text("Date")
+                    .foregroundColor(.white)
             }.padding()
             Picker("", selection: $period) {
                             ForEach(Interval.allCases, id: \.self) { interval in
@@ -114,13 +119,14 @@ struct CreateAndEditCardView: View {
             
             HStack {
                 Text("Price")
+                    .foregroundColor(.white)
                 Spacer()
             }.padding(.horizontal)
             HStack {
                 Text("$AUD")
+                    .foregroundColor(.white)
                     .font(.system(size: 24))
                     .padding(.vertical, 8)
-                    .background(Color.purple)
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -143,7 +149,7 @@ struct CreateAndEditCardView: View {
 
             }.padding().disabled(!submittable())
             
-        }.background(.purple)
+        }.background(backgroundGradient)
             .cornerRadius(10)
             .padding()
             .onAppear {
@@ -183,7 +189,7 @@ struct BasicTextField: View {
     
     var body: some View {
         HStack {
-            Text(text)
+            Text(text).foregroundColor(.white)
             Spacer()
         }.padding(.horizontal)
         TextField(placeholder, text: $fieldName)
