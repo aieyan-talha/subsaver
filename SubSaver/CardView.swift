@@ -28,6 +28,7 @@ struct InnerSmallCard: View {
     let period: Interval;
     let handleDelete: () -> Void
     let price:Float;
+    let subDate:Date;
     
     @State var isOpen:Bool = false;
     
@@ -38,7 +39,8 @@ struct InnerSmallCard: View {
     var body: some View {
         ZStack{
             Rectangle().frame(width: WIDTH, height: (!isOpen ? CLOSED_HEIGHT : HEIGHT)).cornerRadius(20).foregroundStyle(backgroundGradient)
-        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, handleDelete: handleDelete, isOpen:$isOpen), alignment: .top).overlay(ContentCard(textContent:textContent, price: price, period: period, isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
+        }.overlay(TitleCard(cardTitle: cardTitle, handleEdit: handleEdit, handleDelete: handleDelete, isOpen:$isOpen), alignment: .top).overlay(
+            ContentCard(textContent:textContent, price: price, period: period, dueDate: findNextPayableDate(subDate: subDate, period: period), isOpen:$isOpen), alignment: .bottom).animation(.easeInOut, value: isOpen)
     }
 }
 
@@ -91,12 +93,14 @@ struct ContentCard: View {
     let textContent:String;
     let price:Float;
     let period: Interval;
+    let dueDate: String;
     @Binding var isOpen:Bool;
     //WIDTH-20
     let initialWidth:CGFloat = 50;
+    
     var body: some View {
         VStack {
-            Text("Your next payment is on xxxxx").font(.system(size: 16)).foregroundColor(.white)
+            Text("Your next payment is due \(dueDate)").font(.system(size: 16)).foregroundColor(.white)
             if (!isOpen) {
                 PriceCard(price:price, interval: period)
             }
@@ -166,6 +170,7 @@ struct SmallCard: View {
     let title:String;
     let textContent:String;
     let period:String;
+    let subDate:Date;
     
     let handleEdit: () -> Void
     let handleDelete: () -> Void
@@ -173,7 +178,7 @@ struct SmallCard: View {
     
     var body: some View {
         ZStack {
-            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, period: Interval(rawValue: period) ?? .weekly, handleDelete: handleDelete, price: price)
+            InnerSmallCard(cardTitle: title, textContent: textContent, handleEdit: handleEdit, period: Interval(rawValue: period) ?? .weekly, handleDelete: handleDelete, price: price, subDate: subDate)
         }
     }
 }

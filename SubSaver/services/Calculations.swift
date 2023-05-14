@@ -57,4 +57,37 @@ func calculateSpending (subs:FetchedResults<SubscriptionModel>, withPeriod:Inter
     return total;
 }
 
-
+func findNextPayableDate (subDate:Date, period: Interval) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy"
+    var dateComponents: DateComponents;
+    let currentDate = Date()
+    let calendar = Calendar.current
+    switch period {
+        case .weekly:
+            dateComponents = Calendar.current.dateComponents([.weekday], from: subDate)
+        case .monthly:
+            dateComponents = Calendar.current.dateComponents([.day], from: subDate)
+        case .annually:
+            dateComponents = Calendar.current.dateComponents([.day, .month], from: subDate)
+    }
+    let oneDayAgo = calendar.date(byAdding: .day, value: -1, to: currentDate)
+    
+    if let nextDate = calendar.nextDate(after: max(oneDayAgo!, subDate), matching: dateComponents, matchingPolicy: .nextTime) {
+        print(nextDate) // Next date that matches the components
+        let startDateString = dateFormatter.string(from: subDate)
+        let dateString = dateFormatter.string(from: nextDate)
+        let todayString = dateFormatter.string(from: currentDate)
+        if (todayString == dateString && todayString != startDateString) {
+            return "today";
+        }else{
+            return "on \(dateString)";
+        }
+        
+    } else {
+        print("No matching date found basically a huge error")
+        return "error";
+    }
+    
+    
+}
