@@ -144,7 +144,7 @@ struct ContentView: View {
                             )                        }
                     }.padding()
                     ScrollView {
-                        LazyVStack {
+                        VStack {
                             ForEach(subs, id: \.self) { sub in
                                 
                                 if (searchText.count == 0 || sub.name!.lowercased().contains(searchText.lowercased())) {
