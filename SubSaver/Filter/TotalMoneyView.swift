@@ -28,7 +28,7 @@ struct TotalMoneyView: View {
     
     var body: some View {
         VStack {
-            
+            /*
             Text("Total/\(dateTypeString)")
                 .font(.system(size: 50))
                 .foregroundColor(.white)
@@ -39,7 +39,7 @@ struct TotalMoneyView: View {
                 .font(.system(size: 50))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-            
+            */
             HStack(){
                 Spacer()
                 Button(action: {
