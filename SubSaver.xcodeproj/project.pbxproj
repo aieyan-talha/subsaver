@@ -25,6 +25,7 @@
 		FDD3664C2A06701500BFA777 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664B2A06701500BFA777 /* CardView.swift */; };
 		FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664D2A0670D200BFA777 /* LocalMemory.swift */; };
 		FDD366502A06714200BFA777 /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3664F2A06714200BFA777 /* LocalNotifications.swift */; };
+		FDD643292A1070B2002626EC /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD643282A1070B2002626EC /* Calculations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		FDD3664B2A06701500BFA777 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		FDD3664D2A0670D200BFA777 /* LocalMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMemory.swift; sourceTree = "<group>"; };
 		FDD3664F2A06714200BFA777 /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
+		FDD643282A1070B2002626EC /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		289D33ED2A062D7F002ADAF7 /* SubSaver */ = {
 			isa = PBXGroup;
 			children = (
+				FDD643272A10709C002626EC /* services */,
 				18E2FA032A0FEC5F000435C6 /* Extension */,
 				18E2FA0A2A0FED1F000435C6 /* Filter */,
 				28EA014E2A0CCB070052DDE5 /* Models */,
@@ -131,6 +134,14 @@
 				28EA014F2A0CCB230052DDE5 /* SubscriptionItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FDD643272A10709C002626EC /* services */ = {
+			isa = PBXGroup;
+			children = (
+				FDD643282A1070B2002626EC /* Calculations.swift */,
+			);
+			path = services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +217,7 @@
 				2821EBB02A09E9550031C91C /* CreateAndEditCardView.swift in Sources */,
 				18E2FA092A0FECE8000435C6 /* ColorExtension.swift in Sources */,
 				18E2FA102A0FEE96000435C6 /* WelcomeToptView.swift in Sources */,
+				FDD643292A1070B2002626EC /* Calculations.swift in Sources */,
 				FDD3664E2A0670D200BFA777 /* LocalMemory.swift in Sources */,
 				28EA014D2A0CB6060052DDE5 /* CoreDataController.swift in Sources */,
 				18E2FA0E2A0FEE77000435C6 /* TotalMoneyView.swift in Sources */,
